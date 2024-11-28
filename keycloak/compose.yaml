@@ -19,7 +19,7 @@ services:
         - '/opt/docker/keycloak/appdata:/opt/keycloak/data'
     #labels:
     #    - "traefik.enable=true"
-    #    - "traefik.http.routers.keycloak.rule=Host(`auth2.delaopozas.com`)"
+    #    - "traefik.http.routers.keycloak.rule=Host(`auth2.${BASE_DOMAIN}`)"
     #    - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
     #    # Redirect '/' to '/admin'
     #    - "traefik.http.middlewares.custom-redirect.redirectregex.regex=^https:\\/\\/([^\\/]+)\\/?$$"

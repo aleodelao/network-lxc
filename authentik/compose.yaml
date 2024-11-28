@@ -59,7 +59,7 @@ services:
       - "${COMPOSE_PORT_HTTPS:-9443}:9443"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.authentik-server.rule=Host(`authentik.delaopozas.com`)"
+      - "traefik.http.routers.authentik-server.rule=Host(`authentik.${BASE_DOMAIN}`)"
       - "traefik.http.routers.authentik-server.entrypoints=https"
       - "traefik.http.routers.authentik-server.tls=true"
       - "traefik.http.services.authentik-server.loadbalancer.server.port=9000"
