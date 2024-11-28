@@ -1,0 +1,27 @@
+---
+
+services:
+  keycloak:
+    # internal: keycloak on port 8080
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    command: start
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    environment:
+        KC_HOSTNAME: 'network-lxc.local'
+        PROXY_ADDRESS_FORWARDING: 'true'
+        KC_PROXY: 'edge'
+        KC_BOOTSTRAP_ADMIN_USERNAME: 'admin'
+        KC_BOOTSTRAP_ADMIN_PASSWORD: 'admin'
+    volumes:
+        - '/opt/docker/keycloak/appdata:/opt/keycloak/data'
+    #labels:
+    #    - "traefik.enable=true"
+    #    - "traefik.http.routers.keycloak.rule=Host(`auth2.delaopozas.com`)"
+    #    - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
+    #    # Redirect '/' to '/admin'
+    #    - "traefik.http.middlewares.custom-redirect.redirectregex.regex=^https:\\/\\/([^\\/]+)\\/?$$"
+    #    - "traefik.http.middlewares.custom-redirect.redirectregex.replacement=https://$$1/admin"
+    #    - "traefik.http.routers.route-auth.middlewares=middlewares-default@file,custom-redirect"

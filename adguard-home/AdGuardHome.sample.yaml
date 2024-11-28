@@ -1,0 +1,248 @@
+http:
+  pprof:
+    port: 6060
+    enabled: false
+  address: 10.0.0.100:80
+  session_ttl: 720h
+users:
+  - name: adelao
+    password: $2a$10$v4ReCYyCAxYaECSmoOLE/uxNWRNcs7bBr8RAD6JCalPPJQlMruKPK
+auth_attempts: 5
+block_auth_min: 15
+http_proxy: ""
+language: en
+theme: auto
+dns:
+  bind_hosts:
+    - 10.0.0.100
+  port: 53
+  anonymize_client_ip: false
+  ratelimit: 20
+  ratelimit_subnet_len_ipv4: 24
+  ratelimit_subnet_len_ipv6: 56
+  ratelimit_whitelist: []
+  refuse_any: true
+  upstream_dns:
+    - https://dns.cloudflare.com/dns-query
+  upstream_dns_file: ""
+  bootstrap_dns:
+    - 1.1.1.1
+    - 1.0.0.1
+    - 2606:4700:4700::1111
+    - 2606:4700:4700::1001
+  fallback_dns: []
+  upstream_mode: load_balance
+  fastest_timeout: 1s
+  allowed_clients: []
+  disallowed_clients: []
+  blocked_hosts:
+    - version.bind
+    - id.server
+    - hostname.bind
+  trusted_proxies:
+    - 127.0.0.0/8
+    - ::1/128
+  cache_size: 4194304
+  cache_ttl_min: 0
+  cache_ttl_max: 0
+  cache_optimistic: false
+  bogus_nxdomain: []
+  aaaa_disabled: false
+  enable_dnssec: false
+  edns_client_subnet:
+    custom_ip: ""
+    enabled: false
+    use_custom: false
+  max_goroutines: 300
+  handle_ddr: true
+  ipset: []
+  ipset_file: ""
+  bootstrap_prefer_ipv6: false
+  upstream_timeout: 10s
+  private_networks: []
+  use_private_ptr_resolvers: true
+  local_ptr_upstreams:
+    - 127.0.0.1:53
+  use_dns64: false
+  dns64_prefixes: []
+  serve_http3: false
+  use_http3_upstreams: false
+  serve_plain_dns: true
+  hostsfile_enabled: true
+tls:
+  enabled: false
+  server_name: ""
+  force_https: false
+  port_https: 443
+  port_dns_over_tls: 853
+  port_dns_over_quic: 853
+  port_dnscrypt: 0
+  dnscrypt_config_file: ""
+  allow_unencrypted_doh: false
+  certificate_chain: ""
+  private_key: ""
+  certificate_path: ""
+  private_key_path: ""
+  strict_sni_check: false
+querylog:
+  dir_path: ""
+  ignored: []
+  interval: 2160h
+  size_memory: 1000
+  enabled: true
+  file_enabled: true
+statistics:
+  dir_path: ""
+  ignored: []
+  interval: 24h
+  enabled: true
+filters:
+  - enabled: true
+    url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+    name: AdGuard DNS filter
+    id: 1
+  - enabled: false
+    url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
+    name: AdAway Default Blocklist
+    id: 2
+  - enabled: true
+    url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_51.txt
+    name: HaGeZi's Pro++ Blocklist
+    id: 1712870506
+whitelist_filters: []
+user_rules:
+  - '! Youtube blacklist by Snapsz'
+  - /^r[0-9]+-+sn-+[a-z0-9]+-+[a-z0-9]+\.googlevideo\.com$/
+  - '||www.googleadservices.com^$important'
+  - “twitch.tv#%#(function(){if("function"==typeof fetch){var a=window.fetch;window.fetch=function(b){if(2<=arguments.length&&"string"==typeof b&&b.includes("/access_token")){var d=new URL(arguments[0]);d.searchParams.delete("player_type"),d.searchParams.delete("platform"),arguments[0]=d.href}return a.apply(this,arguments)}}})();"
+  - “twitch.tv#%#!function(){var c;!1!==/(^|\.)twitch\.tv$/.test(document.location.hostname)&&(c=window.fetch,window.fetch=function(t,e){var n;return 2<=arguments.length&&"string"==typeof t&&t.includes("/access_token")&&((n=new URL(t)).searchParams.forEach(function(t,e){n.searchParams.delete(e)}),t=n.href),c.apply(this,arguments)})}();”
+dhcp:
+  enabled: false
+  interface_name: ""
+  local_domain_name: lan
+  dhcpv4:
+    gateway_ip: 10.0.0.1
+    subnet_mask: 255.255.255.0
+    range_start: 10.0.0.150
+    range_end: 10.0.0.254
+    lease_duration: 86400
+    icmp_timeout_msec: 1000
+    options: []
+  dhcpv6:
+    range_start: ""
+    lease_duration: 86400
+    ra_slaac_only: false
+    ra_allow_slaac: false
+filtering:
+  blocking_ipv4: ""
+  blocking_ipv6: ""
+  blocked_services:
+    schedule:
+      time_zone: Local
+    ids: []
+  protection_disabled_until: null
+  safe_search:
+    enabled: false
+    bing: true
+    duckduckgo: true
+    ecosia: true
+    google: true
+    pixabay: true
+    yandex: true
+    youtube: true
+  blocking_mode: default
+  parental_block_host: family-block.dns.adguard.com
+  safebrowsing_block_host: standard-block.dns.adguard.com
+  rewrites:
+    - domain: pve.local
+      answer: 10.0.0.2
+    - domain: omada-lxc.local
+      answer: 10.0.0.105
+    - domain: jellyfin-lxc.local
+      answer: 10.0.0.101
+    - domain: servarr-lxc.local
+      answer: 10.0.0.107
+    - domain: '*.delaopozas.com'
+      answer: traefik.local
+    - domain: qbittorrent-lxc.local
+      answer: 10.0.0.108
+    - domain: adguard-1.local
+      answer: adguard-lxc.local
+    - domain: portainer.local
+      answer: docker-lxc.local
+    - domain: adguard-2.local
+      answer: pi-server.local
+    - domain: radarr.local
+      answer: servarr-lxc.local
+    - domain: hass-vm.local
+      answer: 10.0.0.120
+    - domain: sonarr.local
+      answer: servarr-lxc.local
+    - domain: jackett.local
+      answer: servarr-lxc.local
+    - domain: pi-server.local
+      answer: 10.0.0.3
+    - domain: fileserver-lxc.local
+      answer: 10.0.0.102
+    - domain: vaultwarden-lxc.local
+      answer: 10.0.0.104
+    - domain: pcerda-pc.local
+      answer: 10.0.0.166
+    - domain: guacamole.local
+      answer: docker-lxc.local
+    - domain: jellyseerr-lxc.local
+      answer: 10.0.0.110
+    - domain: jellystat.local
+      answer: docker-lxc.local
+    - domain: modem.local
+      answer: 192.168.100.1
+    - domain: grafana-lxc.local
+      answer: 10.0.0.111
+    - domain: influxdb-lxc.local
+      answer: 10.0.0.109
+    - domain: authentik.local
+      answer: network-lxc.local
+    - domain: traefik.local
+      answer: network-lxc.local
+    - domain: filebrowser-lxc.local
+      answer: 10.0.0.114
+    - domain: docker-lxc.local
+      answer: 10.0.0.103
+    - domain: adguard-lxc.local
+      answer: 10.0.0.100
+    - domain: network-lxc.local
+      answer: 10.0.0.112
+  safe_fs_patterns:
+    - /opt/AdGuardHome/data/userfilters/*
+  safebrowsing_cache_size: 1048576
+  safesearch_cache_size: 1048576
+  parental_cache_size: 1048576
+  cache_time: 30
+  filters_update_interval: 24
+  blocked_response_ttl: 10
+  filtering_enabled: true
+  parental_enabled: false
+  safebrowsing_enabled: false
+  protection_enabled: true
+clients:
+  runtime_sources:
+    whois: true
+    arp: true
+    rdns: true
+    dhcp: true
+    hosts: true
+  persistent: []
+log:
+  enabled: true
+  file: ""
+  max_backups: 0
+  max_size: 100
+  max_age: 3
+  compress: false
+  local_time: false
+  verbose: false
+os:
+  group: ""
+  user: ""
+  rlimit_nofile: 0
+schema_version: 29
